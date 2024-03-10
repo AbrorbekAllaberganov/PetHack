@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class CORSFilter extends GenericFilterBean implements Filter {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

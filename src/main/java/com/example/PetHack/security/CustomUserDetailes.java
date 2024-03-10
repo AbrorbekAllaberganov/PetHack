@@ -2,7 +2,6 @@ package com.example.PetHack.security;
 
 
 import com.example.PetHack.entity.Parent;
-import com.example.PetHack.repository.AdminRepository;
 import com.example.PetHack.repository.ParentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,7 +17,6 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailes implements UserDetailsService {
-    private final AdminRepository adminRepository;
     private final ParentRepository parentRepository;
 
 

@@ -1,12 +1,14 @@
 package com.example.PetHack.payload;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@ApiModel(description = "Each API responses based on this model")
 public class Result {
     private String message;
     private boolean status;

@@ -33,15 +33,15 @@ public class SwaggerSupportPositionApiOperationReader implements OperationReader
 
     @Override
     public List<Operation> read(RequestMappingContext outerContext) {
-        List<Operation> operations = new ArrayList();
+        List<Operation> operations = new ArrayList<>();
 
         Set<RequestMethod> requestMethods = outerContext.getMethodsCondition();
         Set<RequestMethod> supportedMethods = supportedMethods(requestMethods);
 
         //Setup response message list
-        Integer currentCount = 0;
+        int currentCount = 0;
         // Get position, then support position. NOTE: not support sorted by RequestMethod .
-        int position = getApiOperationPosition(outerContext, 0);
+        int position = getApiOperationPosition(outerContext);
 
         for (RequestMethod httpRequestMethod : supportedMethods) {
             OperationContext operationContext = new OperationContext(
@@ -56,7 +56,7 @@ public class SwaggerSupportPositionApiOperationReader implements OperationReader
                 currentCount++;
             }
         }
-        Collections.sort(operations, outerContext.operationOrdering());
+        operations.sort(outerContext.operationOrdering());
 
         return operations;
     }
@@ -67,8 +67,8 @@ public class SwaggerSupportPositionApiOperationReader implements OperationReader
                 : requestMethods;
     }
 
-    private int getApiOperationPosition(final RequestMappingContext outerContext, final int defaultValue) {
+    private int getApiOperationPosition(final RequestMappingContext outerContext) {
         final Optional<ApiOperation> annotation = outerContext.findAnnotation(ApiOperation.class);
-        return annotation.isPresent() ? annotation.get().position() : defaultValue;
+        return annotation.map(ApiOperation::position).orElse(0);
     }
 }
